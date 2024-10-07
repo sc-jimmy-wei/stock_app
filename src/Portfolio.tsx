@@ -10,6 +10,7 @@ type Portfolio = {
   quantity: number;
 }
 
+// Define columns for DataTable
 const portfolioColumns: TableColumn<Portfolio>[] = [
   {
     name: 'Ticker',
@@ -29,7 +30,7 @@ const Portfolio: React.FC = () => {
   const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
   const [ticker, setTicker] = useState('');
   const [quantity, setQuantity] = useState(0);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null); // Error messages
 
   useEffect(() => {
     fetchPortfolio();

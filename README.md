@@ -12,6 +12,8 @@
 
 ### `python3 sellscalehood.py`
 
+python - 3.9+
+
 Runs the server in development mode.\
 
 Add `"proxy": "http://localhost:5000"` to package.json in frontend project to make request to server
@@ -21,6 +23,8 @@ Note: Restart server will wipe personal portfolio data.
 ## Frontend Setup
 
 ### `npm install`
+
+See `package.json` for versions.
 
 Install required packages and dependencies.
 

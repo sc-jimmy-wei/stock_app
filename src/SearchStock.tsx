@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { Alert, Spinner } from 'react-bootstrap';
@@ -16,6 +16,7 @@ type Stock = {
   date: string
 }
 
+// Define columns for DataTable
 const stockColumns: TableColumn<Stock>[] = [
   {
     name: 'Date',
@@ -70,8 +71,8 @@ const stockColumns: TableColumn<Stock>[] = [
 const SearchStock: React.FC = () => {
   const [ticker, setTicker] = useState('');
   const [historicalData, setHistoricalData] = useState<Stock[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // Loading icon
+  const [error, setError] = useState<string | null>(null); // Error message
 
   const lookupStock = async() => {
     try {

@@ -7,17 +7,18 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///portfolio.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-
+# Creaete DB, Add table
 with app.app_context():
     db.init_app(app)
 
     from db_models import Portfolio
 
+    # For testing purpose, clear DB after restart
     db.drop_all()
     db.create_all()
     db.session.commit()
 
-
+# Look up stock historical data by company ticker
 @app.route("/v1/stock/<ticker>", methods=["GET"])
 def lookup_stock(ticker):
     stock = y.Ticker(ticker)
@@ -45,7 +46,7 @@ def lookup_stock(ticker):
         message = "No ticker found, symbol may be delisted"
         return jsonify({"error": message}), 500
 
-
+# Buy stock 
 @app.route("/v1/stock/buy", methods=["POST"])
 def buy_stock():
     data = request.json
@@ -68,7 +69,7 @@ def buy_stock():
     message = "Cannot buy due to no ticker found or invalid units."
     return jsonify({"error": message}), 500
 
-
+# Sell stock
 @app.route("/v1/stock/sell", methods=["POST"])
 def sell_stock():
     data = request.json
@@ -87,7 +88,7 @@ def sell_stock():
     message = "Cannot sell due to no ticker found or invalid units."
     return jsonify({"messsage": message}), 500
 
-
+# View bought stock
 @app.route("/v1/portfolio", methods=["GET"])
 def view_portfolio():
     stocks = Portfolio.query.all()
